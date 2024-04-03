@@ -6,14 +6,16 @@ You'll need a digitalocean droplet for this guide.
 
 Connect to your server and use the command line to install Vim and Nginx.
 
-```
+```bash
 sudo pacman -Sy vim nginx
 ```
 
 Don't forget to start and enable nginx by using these two commands.
 
-```
+```bash
 sudo systemctl start nginx
+```
+```bash
 sudo systemctl enable nginx
 ```
 
@@ -21,7 +23,7 @@ sudo systemctl enable nginx
 
 Make the directory that will hold our project files in the root folder.
 
-```
+```bash
 sudo mkdir -p /web/html/nginx-2420
 ```
 
@@ -29,18 +31,45 @@ sudo mkdir -p /web/html/nginx-2420
 
 The following commands will set up the directories and the html file that we will show on our website. If you are not the root user it is important to do these steps in this order to avoid errors.
 
-```
+Go to `/etc/nginx` directory
+
+```bash
 cd /etc/nginx
+```
+
+Make `sites-available` directory
+
+```bash
 sudo mkdir sites-available
+```
+
+Make `sites-enabled` directory
+
+```bash
 sudo mkdir sites-enabled
+```
+
+Go into `sites-available` directory
+
+```bash
 cd sites-available
+```
+
+Create a new config file
+
+```bash
 sudo touch nginx-2420.conf
+```
+
+Edit the config file
+
+```bash
 sudo vim nginx-2420.conf
 ```
 
 Add the following configuration to the file. You will need to press I to enter insert mode in Vim.
 
-```
+```nginx
 # /etc/nginx/sites-available/nginx-2420.conf
 
 server {
@@ -64,19 +93,19 @@ Save and exit by pressing ESC and typing `:wq`
 
 Go to nginx directory
 
-```
+```bash
 cd /etc/nginx/
 ```
 
 Edit the `nginx.conf` file to include the directory we made
 
-```
+```bash
 sudo vim nginx.conf
 ```
 
 Add this to the end of the http block. (one line above the last curly brace, make sure it is indented)
 
-```
+```nginx
 include sites-enabled/*;
 ```
 
@@ -84,7 +113,7 @@ include sites-enabled/*;
 
 Next create a symlink to enable your new website. This takes your website in the sites-available directory and links it to the sites-enabled directory to enable your site.
 
-```
+```bash
 sudo ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/nginx-2420.conf
 ```
 
@@ -92,21 +121,64 @@ sudo ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/n
 
 Use these commands to make the directories and the index file.
 
-```
+Go to root directory
+
+```bash
 cd /
+```
+
+Make `web` directory
+
+```bash
 sudo mkdir web
+```
+
+Go into the directory you made
+
+```bash
 cd web
+```
+
+Make another new directory called `html`
+
+```bash
 sudo mkdir html
+```
+
+Go into the `html` directory
+
+```bash
 cd html
+```
+
+Make another new directory called `nginx-2420`
+
+```bash
 sudo mkdir nginx-2420
+```
+
+Go into the `nginx-2420` directory
+
+```bash
 cd nginx-2420
+```
+
+If you type `pwd` right now you should see `/web/html/nginx-2420` in the terminal
+Now create your `index.html` file
+
+```bash
 sudo touch index.html
+```
+
+Edit the html file
+
+```bash
 sudo vim index.html
 ```
 
-Paste this html code into your `index.html` file
+Paste this html code into your `index.html` file:
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,7 +216,7 @@ Save and exit by pressing ESC and typing `:wq`
 
 You must restart Nginx for the config file changes to be recognized.
 
-```
+```bash
 sudo systemctl restart nginx
 ```
 
