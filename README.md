@@ -1,8 +1,10 @@
 # How to setup a basic website on an arch linux server
+---
 
 You'll need a digitalocean droplet for this guide.
 
 ## 1. Install Vim and Nginx
+---
 
 Connect to your server and use the command line to install Vim and Nginx.
 
@@ -20,6 +22,7 @@ sudo systemctl enable nginx
 ```
 
 ## 2. Make the project directory
+---
 
 Make the directory that will hold our project files in the root folder.
 
@@ -28,6 +31,7 @@ sudo mkdir -p /web/html/nginx-2420
 ```
 
 ## 3. Make a config file
+---
 
 The following commands will set up the directories and the html file that we will show on our website. If you are not the root user it is important to do these steps in this order to avoid errors.
 
@@ -90,6 +94,7 @@ Make sure you replace `your_ip` with your DigitalOcean droplet IP address.
 Save and exit by pressing ESC and typing `:wq`
 
 ## 4. Edit Nginx.conf to include sites-enabled
+---
 
 Go to nginx directory
 
@@ -110,6 +115,7 @@ include sites-enabled/*;
 ```
 
 ## 5. Create a symbolic link
+---
 
 Next create a symlink to enable your new website. This takes your website in the sites-available directory and links it to the sites-enabled directory to enable your site.
 
@@ -118,6 +124,7 @@ sudo ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/n
 ```
 
 ## 6. Add the demo html code
+---
 
 Use these commands to make the directories and the index file.
 
@@ -213,6 +220,7 @@ Paste this html code into your `index.html` file:
 Save and exit by pressing ESC and typing `:wq`
 
 ## 7. Restart Nginx
+---
 
 You must restart Nginx for the config file changes to be recognized.
 
@@ -221,6 +229,7 @@ sudo systemctl restart nginx
 ```
 
 ## 8. Check out your new website
+---
 
 You can see your new website by opening a web browser on your computer and typing your DigitalOcean Droplet IP address into the address bar.
 
