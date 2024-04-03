@@ -1,6 +1,6 @@
-# How to setup a basic website on an arch linux server
+# How to Setup a Basic Website on an Arch Linux Server
 
-You'll need a digitalocean droplet for this guide.
+You'll need a DigitalOcean Droplet for this guide.
 
 ## 1. Install Vim and Nginx
 
@@ -19,7 +19,7 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 ```
 
-## 2. Make the project directory
+## 2. Make the Project Directory
 
 Make the directory that will hold our project files in the root folder.
 
@@ -27,7 +27,7 @@ Make the directory that will hold our project files in the root folder.
 sudo mkdir -p /web/html/nginx-2420
 ```
 
-## 3. Make a config file
+## 3. Make a Config File
 
 The following commands will set up the directories and the html file that we will show on our website. If you are not the root user it is important to do these steps in this order to avoid errors.
 
@@ -82,14 +82,13 @@ server {
         index index.html;
     }
 }
-
 ```
 
 Make sure you replace `your_ip` with your DigitalOcean droplet IP address.
 
 Save and exit by pressing ESC and typing `:wq`
 
-## 4. Edit Nginx.conf to include sites-enabled
+## 4. Edit the Nginx Config File to Include `sites-enabled`
 
 Go to nginx directory
 
@@ -109,7 +108,7 @@ Add this to the end of the http block. (one line above the last curly brace, mak
 include sites-enabled/*;
 ```
 
-## 5. Create a symbolic link
+## 5. Create a Symbolic Link
 
 Next create a symlink to enable your new website. This takes your website in the sites-available directory and links it to the sites-enabled directory to enable your site.
 
@@ -117,7 +116,7 @@ Next create a symlink to enable your new website. This takes your website in the
 sudo ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/nginx-2420.conf
 ```
 
-## 6. Add the demo html code
+## 6. Add the Demo HTML Code
 
 Use these commands to make the directories and the index file.
 
@@ -170,13 +169,13 @@ Now create your `index.html` file
 sudo touch index.html
 ```
 
-Edit the html file
+Edit the HTML file
 
 ```bash
 sudo vim index.html
 ```
 
-Paste this html code into your `index.html` file:
+Paste this HTML code into your `index.html` file:
 
 ```html
 <!DOCTYPE html>
@@ -220,7 +219,7 @@ You must restart Nginx for the config file changes to be recognized.
 sudo systemctl restart nginx
 ```
 
-## 8. Check out your new website
+## 8. Check Out Your New Website
 
 You can see your new website by opening a web browser on your computer and typing your DigitalOcean Droplet IP address into the address bar.
 
