@@ -10,7 +10,7 @@ Connect to your server and use the command line to install Vim and Nginx.
 sudo pacman -Sy vim nginx
 ```
 
-Don't forget to start and enable nginx by using these two commands.
+Don't forget to start and enable the nginx service by using these two commands.
 
 ```bash
 sudo systemctl start nginx
