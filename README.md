@@ -151,3 +151,5 @@ sudo systemctl restart nginx
 ## 8. Check out your new website
 
 You can see your new website by opening a web browser on your computer and typing your DigitalOcean Droplet IP address into the address bar.
+
+![Screenshot](https://github.com/quistinie/nginx-2420/blob/main/Screenshot_1.jpg?raw=true)
