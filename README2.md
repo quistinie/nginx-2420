@@ -55,7 +55,7 @@ cd /etc/systemd/system
 ```bash
 sudo vim backend.service
 ```
-Type this into
+Type this into your `backend.service` file.
 ```plaintext
 [Unit]
 Description=Backend Service
@@ -67,3 +67,55 @@ ExecStart=/web/backend/hello-server
 [Install]
 WantedBy=multi-user.target
 ```
+Use `:wq` to save and exit vim.
+
+### Enable and Start Service
+Reload the daemon, then enable and start the backend service:
+```bash
+sudo systemctl daemon-reload
+```
+```bash
+sudo systemctl enable backend
+```
+```bash
+sudo systemctl start backend
+```
+
+## 4. Configure Nginx Reverse Proxy
+Open the config file we created in the first tutorial.
+```bash
+sudo vim /etc/nginx/sites-available/nginx-2420.conf
+```
+Add the `/hey` and `/echo` location blocks to the server block.
+```bash
+# /etc/nginx/sites-available/nginx-2420.conf
+
+server {
+    listen 80;
+    server_name your_ip;
+
+    root /web/html/nginx-2420;
+
+    location / {
+        index index.html;
+    }
+
+    location /hey {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /echo {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+```
+Again, ensure `your_ip` is the IP of your Digital Ocean droplet. We did this in part 1 so it should already be there.
