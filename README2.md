@@ -47,6 +47,10 @@ Move the backend binary into this directory.
 ```bash
 sudo mv /home/christine/hello-server /web/backend
 ```
+Make the `hello-server` file executable
+```bash
+sudo chmod +x hello-server
+```
 
 ### Make the service
 ```bash
@@ -87,7 +91,7 @@ Open the config file we created in the first tutorial.
 sudo vim /etc/nginx/sites-available/nginx-2420.conf
 ```
 Add the `/hey` and `/echo` location blocks to the server block.
-```bash
+```nginx
 # /etc/nginx/sites-available/nginx-2420.conf
 
 server {
@@ -119,3 +123,26 @@ server {
 
 ```
 Again, ensure `your_ip` is the IP of your Digital Ocean droplet. We did this in part 1 so it should already be there.
+
+Save and exit vim with `:wq`
+
+### Restart Nginx
+Restart Nginx
+```bash
+sudo systemctl restart nginx
+```
+
+## 5. Verify that your service is running
+You can verify that your service is running with this command. It should say active and enabled and have a green dot.
+```bash
+systemctl status backend
+```
+
+### Postman
+Using Postman you can send a GET request to `your_ip/hey`. Replace `your_ip` with the IP of your DigitalOcean droplet.
+
+![GetRequest]()
+
+Send a POST request to test `/echo`. Write text in the body using the raw and json options in Postman.
+
+![PostRequest]()
