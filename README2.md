@@ -141,8 +141,8 @@ systemctl status backend
 ### Postman
 Using Postman you can send a GET request to `your_ip/hey`. Replace `your_ip` with the IP of your DigitalOcean droplet.
 
-![GetRequest]()
+![GetRequest](https://raw.githubusercontent.com/quistinie/nginx-2420/main/Screenshot_2.jpg)
 
 Send a POST request to test `/echo`. Write text in the body using the raw and json options in Postman.
 
-![PostRequest]()
+![PostRequest](https://raw.githubusercontent.com/quistinie/nginx-2420/main/Screenshot_3.jpg)
